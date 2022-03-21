@@ -3,6 +3,6 @@ module com.example.project3 {
     requires javafx.fxml;
 
 
-    opens com.example.project3 to javafx.fxml;
-    exports com.example.project3;
+    opens edu.rutgers.sumanth.cs213 to javafx.fxml;
+    exports edu.rutgers.sumanth.cs213;
 }

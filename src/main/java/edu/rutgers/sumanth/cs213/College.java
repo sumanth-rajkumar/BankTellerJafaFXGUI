@@ -1,4 +1,4 @@
-package com.example.project3;
+package edu.rutgers.sumanth.cs213;
 
 /**
  * College class is an enum class to set the campus. This class is used to handle CollegeChecking

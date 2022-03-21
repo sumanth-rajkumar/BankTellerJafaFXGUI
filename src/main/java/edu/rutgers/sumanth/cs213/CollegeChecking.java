@@ -1,4 +1,4 @@
-package com.example.project3;
+package edu.rutgers.sumanth.cs213;
 
 /**
  * College Checking class is the extension of Checking class. It contains the data and specific operations

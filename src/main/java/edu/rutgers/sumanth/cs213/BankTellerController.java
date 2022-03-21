@@ -1,4 +1,4 @@
-package com.example.project3;
+package edu.rutgers.sumanth.cs213;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -7,7 +7,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.text.Text;
 
 import java.time.LocalDate;
 

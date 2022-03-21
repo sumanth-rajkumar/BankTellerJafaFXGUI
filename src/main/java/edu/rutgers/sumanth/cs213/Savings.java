@@ -1,4 +1,4 @@
-package com.example.project3;
+package edu.rutgers.sumanth.cs213;
 
 /**
  * Savings class is the extension of Account class. It contains the data and specific operations

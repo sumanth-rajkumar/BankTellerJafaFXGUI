@@ -1,4 +1,4 @@
-package com.example.project3;
+package edu.rutgers.sumanth.cs213;
 
 /**
  * MoneyMarket class is the extension of Savings class. It contains the data and specific operations

@@ -1,4 +1,4 @@
-package com.example.project3;
+package edu.rutgers.sumanth.cs213;
 
 /**
  * Profile class defines the information of an account holder, which are first name, last name and

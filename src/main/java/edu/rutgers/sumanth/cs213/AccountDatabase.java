@@ -5,7 +5,7 @@
   @author Sumanth Rajkumar, Shantanu Jain
  */
 
-package com.example.project3;
+package edu.rutgers.sumanth.cs213;
 
 
 import java.text.DecimalFormat;

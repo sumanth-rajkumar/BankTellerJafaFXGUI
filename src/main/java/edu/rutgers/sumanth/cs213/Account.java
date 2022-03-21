@@ -1,4 +1,4 @@
-package com.example.project3; /**
+package edu.rutgers.sumanth.cs213; /**
  * Account Class is an abstract class that defines the common data and operations for all account
  * type; each account has a profile that uniquely identifies the account holder. This is the superclass
  * of all account types, and it is an abstract class with 3 methods.

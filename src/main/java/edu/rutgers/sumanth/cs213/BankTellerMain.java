@@ -1,4 +1,4 @@
-package com.example.project3;
+package edu.rutgers.sumanth.cs213;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

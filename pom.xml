@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.project3/com.example.project3.BankTellerMain</mainClass>
+                            <mainClass>com.example.project3/edu.rutgers.sumanth.cs213.BankTellerMain</mainClass>
                         </configuration>
                     </execution>
                 </executions>
