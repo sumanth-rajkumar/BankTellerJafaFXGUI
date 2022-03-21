@@ -27,8 +27,7 @@ public class BankTellerController {
 
     @FXML
     private RadioButton camden;
-
-
+    
     @FXML
     private TextField deposit, oc_firstName, oc_lastName;
 
@@ -194,10 +193,6 @@ public class BankTellerController {
     @FXML
     void open() {
         RadioButton selectedRadioButton = (RadioButton) oc_accountType.getSelectedToggle();
-        if(selectedRadioButton==null){
-            output.setText("Choose an account type");
-            return;
-        }
         switch (selectedRadioButton.getId()) {
             case "C" -> caseCheckingForOpen();
             case "CC" -> caseCollegeCheckingForOpen();
@@ -237,8 +232,10 @@ public class BankTellerController {
      */
     private void caseSavingsForOpen()
     {
+        boolean loyalty;
         Savings savings = new Savings();
-        savings.setLoyalty(loyal.isSelected() || !loyal.isSelected());
+        loyalty = loyal.isSelected();
+        savings.setLoyalty(loyalty);
         checkExistingAndOpenAccount(savings);
     }
     /**
@@ -258,14 +255,10 @@ public class BankTellerController {
     void close()
     {
         RadioButton selectedRadioButton = (RadioButton) oc_accountType.getSelectedToggle();
-        if(selectedRadioButton==null) {
-            output.setText("Choose an account type");
-            return;
-        }
         switch (selectedRadioButton.getId()) {
-            case "checking" -> caseCheckingForClose();
-            case "collegeC" -> caseCollegeCheckingForClose();
-            case "savings" -> caseSavingsForClose();
+            case "C" -> caseCheckingForClose();
+            case "CC" -> caseCollegeCheckingForClose();
+            case "S" -> caseSavingsForClose();
             case "MM" -> caseMoneyMarketForClose();
             default -> output.setText("Invalid Account Type");
         }
@@ -343,10 +336,6 @@ public class BankTellerController {
     void deposit()
     {
         RadioButton selectedRadioButton = (RadioButton) dw_accountType.getSelectedToggle();
-        if(selectedRadioButton==null){
-            output.setText("Choose an account type");
-            return;
-        }
         switch (selectedRadioButton.getId()) {
             case "C" -> caseCheckingForDeposit();
             case "CC" -> caseCollegeCheckingForDeposit();
@@ -384,13 +373,8 @@ public class BankTellerController {
      */
     private void caseCollegeCheckingForDeposit()
     {
-        if(!newark.isSelected() && !nB.isSelected() && !camden.isSelected()){
-            output.setText("Choose a college campus");
-        }
-        else {
-            CollegeChecking clgCheck = new CollegeChecking();
-            depositToAccount(clgCheck);
-        }
+        CollegeChecking clgCheck = new CollegeChecking();
+        depositToAccount(clgCheck);
 
     }
 
@@ -421,7 +405,151 @@ public class BankTellerController {
         depositToAccount(moneyMarket);
     }
 
+    /**
+     * This function is used to withdraw an amount from an account.
+     */
+    @FXML
+    void withdraw()
+    {
+        RadioButton selectedRadioButton = (RadioButton) dw_accountType.getSelectedToggle();
+        switch (selectedRadioButton.getId()) {
+            case "C" -> caseCheckingForWithdraw();
+            case "CC" -> caseCollegeCheckingForWithdraw();
+            case "S" -> caseSavingsForWithdraw();
+            case "MM" -> caseMoneyMarketForWithdraw();
+            default -> output.setText("Invalid Account Type");
+        }
+    }
 
+    /**
+     * This function is a helper that checks if account exists or closed and if
+     * the amount being withdrawn is sufficient before withdrawing an amount from an account.
+     * @param account - account being deposited to.
+     */
+    private void withDrawFromAccount(Account account){
+        if(!populateHolderAndBalance(false, account, "Withdraw - amount cannot be 0 or negative.")){
+            return;
+        }
+        Account existing = accountDatabase.getAccountIfExists(account);
+        if(existing!=null && existing.getType().equals(account.getType())) {
+            if(!existing.isClosed()){
+                if(accountDatabase.withdraw(account)) {
+                    output.setText("Withdraw - balance updated.");
+                }else{
+                    output.setText("Withdraw - insufficient fund.");
+                }
+            }else{
+                output.setText("Account is closed already.");
+            }
+        }else{
+            output.setText(dw_firstName.getText() + " " + dw_lastName.getText() + " " + dw_dob.getValue() + " " + account.getShortType() + " is not in the database.");
+        }
+
+    }
+
+    /**
+     * This function is used to withdraw an amount from a Checking account.
+     */
+    private void caseCheckingForWithdraw()
+    {
+        Checking checking = new Checking();
+        withDrawFromAccount(checking);
+
+    }
+
+    /**
+     * This function is used to withdraw an amount from a College Checking account.
+     */
+    private void caseCollegeCheckingForWithdraw()
+    {
+        CollegeChecking clgCheck = new CollegeChecking();
+        withDrawFromAccount(clgCheck);
+    }
+
+    /**
+     * This function is used to withdraw an amount from a Savings account.
+     */
+    private void caseSavingsForWithdraw()
+    {
+        Savings savings = new Savings();
+        withDrawFromAccount(savings);
+    }
+
+    /**
+     * This function is used to withdraw an amount from a Money Market account.
+     */
+    private void caseMoneyMarketForWithdraw()
+    {
+        MoneyMarket moneyMarket = new MoneyMarket();
+        withDrawFromAccount(moneyMarket);
+    }
+
+    /**
+     * This function is used to print all accounts
+     */
+    @FXML
+    void print()
+    {
+        if(accountDatabase.getNumAcct() > 0)
+        {
+
+            output.setText(accountDatabase.print());
+
+        }
+        else
+        {
+            output.setText("Account Database is empty!");
+        }
+    }
+
+    /**
+     * This function is used to print all accounts by order account type.
+     */
+    @FXML
+    void printByAccountType()
+    {
+        if(accountDatabase.getNumAcct() > 0)
+        {
+            output.setText(accountDatabase.printByAccountType());
+        }
+        else
+        {
+            output.setText("Account Database is empty!");
+        }
+    }
+
+    /**
+     * This function is used to print all accounts with calculated fees and interests.
+     */
+    @FXML
+    void printWithFeeAndInterest()
+    {
+        if(accountDatabase.getNumAcct() > 0)
+        {
+            output.setText(accountDatabase.printFeeAndInterest());
+        }
+        else
+        {
+            output.setText("Account Database is empty!");
+        }
+    }
+
+    /**
+     * This function is used to update the balances of all accounts and print them.
+     */
+    @FXML
+    void updateBalance()
+    {
+        if(accountDatabase.getNumAcct() > 0)
+        {
+            output.setText(accountDatabase.printWithUpdatedBalance());
+
+        }
+        else
+        {
+            output.setText("Account Database is empty!");
+        }
+    }
     
 }
 

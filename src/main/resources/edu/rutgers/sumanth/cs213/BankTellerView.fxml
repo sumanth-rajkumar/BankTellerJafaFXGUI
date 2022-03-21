@@ -3,135 +3,94 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.rutgers.sumanth.cs213.BankTellerController">
+<BorderPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.rutgers.sumanth.cs213.BankTellerController">
     <top>
-        <TabPane minHeight="376.0" minWidth="600.0" prefHeight="376.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE"
-                 BorderPane.alignment="CENTER">
+        <TabPane minHeight="376.0" minWidth="600.0" prefHeight="376.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
                 <Tab text="Open/Close">
                     <content>
-                        <AnchorPane maxHeight="400.0" maxWidth="400.0" minHeight="400.0" minWidth="700.0"
-                                    onDragDetected="#open" prefHeight="195.0" prefWidth="0.0">
+                        <AnchorPane maxHeight="400.0" maxWidth="400.0" minHeight="400.0" minWidth="700.0" onDragDetected="#open" prefHeight="195.0" prefWidth="0.0">
                             <children>
-                                <GridPane layoutX="33.0" layoutY="10.0" minHeight="331.0" minWidth="501.0"
-                                          prefHeight="390.0" prefWidth="527.0">
+                                <GridPane layoutX="33.0" layoutY="10.0" minHeight="331.0" minWidth="501.0" prefHeight="390.0" prefWidth="527.0">
                                     <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0"
-                                                           prefWidth="231.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0"
-                                                           prefWidth="41.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="231.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="41.0" />
                                     </columnConstraints>
                                     <rowConstraints>
-                                        <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="34.0"
-                                                        vgrow="SOMETIMES"/>
-                                        <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="32.0"
-                                                        vgrow="SOMETIMES"/>
-                                        <RowConstraints maxHeight="199.0" minHeight="0.0" prefHeight="33.0"
-                                                        vgrow="SOMETIMES"/>
-                                        <RowConstraints maxHeight="251.0" minHeight="0.0" prefHeight="133.0"
-                                                        vgrow="SOMETIMES"/>
-                                        <RowConstraints maxHeight="251.0" minHeight="0.0" prefHeight="54.0"
-                                                        vgrow="SOMETIMES"/>
-                                        <RowConstraints maxHeight="251.0" minHeight="10.0" prefHeight="112.0"
-                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="199.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="251.0" minHeight="0.0" prefHeight="133.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="251.0" minHeight="0.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="251.0" minHeight="10.0" prefHeight="112.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Label prefHeight="17.0" prefWidth="167.0"
-                                               text="                          First Name"/>
-                                        <Label prefHeight="17.0" prefWidth="163.0"
-                                               text="                          Last Name" GridPane.rowIndex="1"/>
-                                        <Label prefHeight="17.0" prefWidth="162.0"
-                                               text="                          Date of Birth" GridPane.rowIndex="2"/>
-                                        <Label prefHeight="17.0" prefWidth="164.0"
-                                               text="                          Account Type" GridPane.rowIndex="3"/>
-                                        <GridPane prefHeight="136.0" prefWidth="241.0" GridPane.columnIndex="1"
-                                                  GridPane.rowIndex="3">
+                                        <Label prefHeight="17.0" prefWidth="167.0" text="                          First Name" />
+                                        <Label prefHeight="17.0" prefWidth="163.0" text="                          Last Name" GridPane.rowIndex="1" />
+                                        <Label prefHeight="17.0" prefWidth="162.0" text="                          Date of Birth" GridPane.rowIndex="2" />
+                                        <Label prefHeight="17.0" prefWidth="164.0" text="                          Account Type" GridPane.rowIndex="3" />
+                                        <GridPane prefHeight="136.0" prefWidth="241.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                             </columnConstraints>
                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                             <children>
-                                                <RadioButton id="C" fx:id="oc_checking" mnemonicParsing="false"
-                                                             onAction="#selected" selected="true" text="Checking">
+                                                <RadioButton id="C" fx:id="oc_checking" mnemonicParsing="false" onAction="#selected" selected="true" text="Checking">
                                                     <toggleGroup>
-                                                        <ToggleGroup fx:id="oc_accountType"/>
+                                                        <ToggleGroup fx:id="oc_accountType" />
                                                     </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton id="CC" fx:id="oc_collegeC" mnemonicParsing="false"
-                                                             onAction="#selected" text="College Checking"
-                                                             toggleGroup="$oc_accountType" GridPane.columnIndex="1"/>
-                                                <RadioButton id="S" fx:id="oc_savings" mnemonicParsing="false"
-                                                             onAction="#selected" text="Savings"
-                                                             toggleGroup="$oc_accountType" GridPane.rowIndex="1"/>
-                                                <RadioButton id="MM" fx:id="oc_moneyMarket" mnemonicParsing="false"
-                                                             onAction="#selected" text="Money Market"
-                                                             toggleGroup="$oc_accountType" GridPane.columnIndex="1"
-                                                             GridPane.rowIndex="1"/>
+                                                <RadioButton id="CC" fx:id="oc_collegeC" mnemonicParsing="false" onAction="#selected" text="College Checking" toggleGroup="$oc_accountType" GridPane.columnIndex="1" />
+                                                <RadioButton id="S" fx:id="oc_savings" mnemonicParsing="false" onAction="#selected" text="Savings" toggleGroup="$oc_accountType" GridPane.rowIndex="1" />
+                                                <RadioButton id="MM" fx:id="oc_moneyMarket" mnemonicParsing="false" onAction="#selected" text="Money Market" toggleGroup="$oc_accountType" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                             </children>
                                         </GridPane>
-                                        <TextField fx:id="oc_firstName" prefHeight="25.0" prefWidth="162.0"
-                                                   promptText="enter first name" GridPane.columnIndex="1"/>
-                                        <DatePicker fx:id="oc_dob" promptText="enter date of birth"
-                                                    GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                                        <TextField fx:id="oc_lastName" promptText="enter last name"
-                                                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                                        <GridPane prefHeight="35.0" prefWidth="162.0" GridPane.columnIndex="2"
-                                                  GridPane.rowIndex="3">
+                                        <TextField fx:id="oc_firstName" prefHeight="25.0" prefWidth="162.0" promptText="enter first name" GridPane.columnIndex="1" />
+                                        <DatePicker fx:id="oc_dob" promptText="enter date of birth" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <TextField fx:id="oc_lastName" promptText="enter last name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <GridPane prefHeight="35.0" prefWidth="162.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                             </columnConstraints>
                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                         </GridPane>
-                                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="16.0"
-                                              GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="16.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                             <children>
-                                                <Button mnemonicParsing="false" onAction="#open" prefHeight="25.0"
-                                                        prefWidth="116.0" text="Open"/>
-                                                <Button mnemonicParsing="false" onAction="#close" prefHeight="25.0"
-                                                        prefWidth="120.0" text="Close"/>
+                                                <Button mnemonicParsing="false" onAction="#open" prefHeight="25.0" prefWidth="116.0" text="Open" />
+                                                <Button mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="120.0" text="Close" />
                                             </children>
                                         </HBox>
-                                        <GridPane prefHeight="35.0" prefWidth="105.0" GridPane.columnIndex="2"
-                                                  GridPane.rowIndex="3">
+                                        <GridPane prefHeight="35.0" prefWidth="105.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                             </columnConstraints>
                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                             <children>
-                                                <RadioButton fx:id="nB" disable="true" mnemonicParsing="false"
-                                                             text="NB">
+                                                <RadioButton fx:id="nB" disable="true" mnemonicParsing="false" text="NB">
                                                     <toggleGroup>
-                                                        <ToggleGroup fx:id="collegeChecking"/>
+                                                        <ToggleGroup fx:id="collegeChecking" />
                                                     </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton fx:id="newark" disable="true" mnemonicParsing="false"
-                                                             text="Newark" toggleGroup="$collegeChecking"
-                                                             GridPane.rowIndex="1"/>
-                                                <RadioButton fx:id="camden" disable="true" mnemonicParsing="false"
-                                                             text="Camden" toggleGroup="$collegeChecking"
-                                                             GridPane.rowIndex="2"/>
-                                                <CheckBox fx:id="loyal" disable="true" mnemonicParsing="false"
-                                                          text="Loyal Customer" GridPane.rowIndex="3"/>
+                                                <RadioButton fx:id="newark" disable="true" mnemonicParsing="false" text="Newark" toggleGroup="$collegeChecking" GridPane.rowIndex="1" />
+                                                <RadioButton fx:id="camden" disable="true" mnemonicParsing="false" text="Camden" toggleGroup="$collegeChecking" GridPane.rowIndex="2" />
+                                                <CheckBox fx:id="loyal" disable="true" mnemonicParsing="false" text="Loyal Customer" GridPane.rowIndex="3" />
                                             </children>
                                         </GridPane>
-                                        <Label prefHeight="17.0" prefWidth="166.0"
-                                               text="                         Initial Deposit" GridPane.rowIndex="4"/>
-                                        <TextField fx:id="deposit" promptText="enter initial deposit"
-                                                   GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                                        <Label prefHeight="17.0" prefWidth="166.0" text="                         Initial Deposit" GridPane.rowIndex="4" />
+                                        <TextField fx:id="deposit" promptText="enter initial deposit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     </children>
                                 </GridPane>
                             </children>
@@ -140,81 +99,58 @@
                 </Tab>
                 <Tab text="Deposit/Withdraw">
                     <content>
-                        <AnchorPane maxHeight="400.0" maxWidth="400.0" minHeight="400.0" minWidth="700.0"
-                                    prefHeight="195.0" prefWidth="0.0">
+                        <AnchorPane maxHeight="400.0" maxWidth="400.0" minHeight="400.0" minWidth="700.0" prefHeight="195.0" prefWidth="0.0">
                             <children>
-                                <GridPane layoutX="33.0" layoutY="10.0" minHeight="331.0" minWidth="501.0"
-                                          prefHeight="426.0" prefWidth="527.0">
+                                <GridPane layoutX="33.0" layoutY="10.0" minHeight="331.0" minWidth="501.0" prefHeight="426.0" prefWidth="527.0">
                                     <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0"
-                                                           prefWidth="231.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0"
-                                                           prefWidth="41.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="231.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="41.0" />
                                     </columnConstraints>
                                     <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                        <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0"
-                                                        vgrow="SOMETIMES"/>
-                                        <RowConstraints maxHeight="199.0" minHeight="0.0" prefHeight="35.0"
-                                                        vgrow="SOMETIMES"/>
-                                        <RowConstraints maxHeight="251.0" minHeight="0.0" prefHeight="137.0"
-                                                        vgrow="SOMETIMES"/>
-                                        <RowConstraints maxHeight="251.0" minHeight="0.0" prefHeight="65.0"
-                                                        vgrow="SOMETIMES"/>
-                                        <RowConstraints maxHeight="251.0" minHeight="10.0" prefHeight="149.0"
-                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="199.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="251.0" minHeight="0.0" prefHeight="137.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="251.0" minHeight="0.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="251.0" minHeight="10.0" prefHeight="149.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Label text="First Name"/>
-                                        <Label text="Last Name" GridPane.rowIndex="1"/>
-                                        <Label text="Date of Birth" GridPane.rowIndex="2"/>
-                                        <Label text="Account Type" GridPane.rowIndex="3"/>
+                                        <Label text="First Name" />
+                                        <Label text="Last Name" GridPane.rowIndex="1" />
+                                        <Label text="Date of Birth" GridPane.rowIndex="2" />
+                                        <Label text="Account Type" GridPane.rowIndex="3" />
                                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                             </columnConstraints>
                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                             <children>
-                                                <RadioButton id="C" fx:id="dw_checking" mnemonicParsing="false"
-                                                             selected="true" text="Checking">
+                                                <RadioButton id="C" fx:id="dw_checking" mnemonicParsing="false" selected="true" text="Checking">
                                                     <toggleGroup>
-                                                        <ToggleGroup fx:id="dw_accountType"/>
+                                                        <ToggleGroup fx:id="dw_accountType" />
                                                     </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton id="CC" fx:id="dw_collegeC" mnemonicParsing="false"
-                                                             text="College Checking" toggleGroup="$dw_accountType"
-                                                             GridPane.columnIndex="1"/>
-                                                <RadioButton id="S" fx:id="dw_savings" mnemonicParsing="false"
-                                                             text="Savings" toggleGroup="$dw_accountType"
-                                                             GridPane.rowIndex="1"/>
-                                                <RadioButton id="MM" fx:id="dw_moneyMarket" mnemonicParsing="false"
-                                                             text="Money Market" toggleGroup="$dw_accountType"
-                                                             GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                                <RadioButton id="CC" fx:id="dw_collegeC" mnemonicParsing="false" text="College Checking" toggleGroup="$dw_accountType" GridPane.columnIndex="1" />
+                                                <RadioButton id="S" fx:id="dw_savings" mnemonicParsing="false" text="Savings" toggleGroup="$dw_accountType" GridPane.rowIndex="1" />
+                                                <RadioButton id="MM" fx:id="dw_moneyMarket" mnemonicParsing="false" text="Money Market" toggleGroup="$dw_accountType" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                             </children>
                                         </GridPane>
-                                        <TextField fx:id="dw_firstName" prefHeight="25.0" prefWidth="162.0"
-                                                   promptText="enter first name" GridPane.columnIndex="1"/>
-                                        <DatePicker fx:id="dw_dob" promptText="enter date of birth" GridPane.columnIndex="1"
-                                                    GridPane.rowIndex="2"/>
-                                        <TextField fx:id="dw_lastName" promptText="enter last name"
-                                                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="16.0"
-                                              GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                        <TextField fx:id="dw_firstName" prefHeight="25.0" prefWidth="162.0" promptText="enter first name" GridPane.columnIndex="1" />
+                                        <DatePicker fx:id="dw_dob" promptText="enter date of birth" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <TextField fx:id="dw_lastName" promptText="enter last name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="16.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                             <children>
-                                                <Button mnemonicParsing="false" onAction="#deposit" prefHeight="25.0"
-                                                        prefWidth="116.0" text="Deposit"/>
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0"
-                                                        text="Withdraw"/>
+                                                <Button mnemonicParsing="false" onAction="#deposit" prefHeight="25.0" prefWidth="116.0" text="Deposit" />
+                                                <Button mnemonicParsing="false" onAction="#withdraw" prefHeight="25.0" prefWidth="120.0" text="Withdraw" />
                                             </children>
                                         </HBox>
-                                        <Label text="Amount" GridPane.rowIndex="4"/>
-                                        <TextField fx:id="amount" promptText="enter amount" GridPane.columnIndex="1"
-                                                   GridPane.rowIndex="4"/>
+                                        <Label text="Amount" GridPane.rowIndex="4" />
+                                        <TextField fx:id="amount" promptText="enter amount" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     </children>
                                 </GridPane>
                             </children>
@@ -225,14 +161,10 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <Button layoutX="40.0" layoutY="42.0" mnemonicParsing="false" prefHeight="43.0"
-                                        prefWidth="166.0" text="Print All Accounts"/>
-                                <Button layoutX="367.0" layoutY="42.0" mnemonicParsing="false" prefHeight="41.0"
-                                        prefWidth="166.0" text="Calculate Interest and Fees"/>
-                                <Button layoutX="40.0" layoutY="140.0" mnemonicParsing="false" prefHeight="44.0"
-                                        prefWidth="166.0" text="Print All Accounts by Types"/>
-                                <Button layoutX="367.0" layoutY="140.0" mnemonicParsing="false" prefHeight="43.0"
-                                        prefWidth="166.0" text="Apply Interests and Fees"/>
+                                <Button layoutX="40.0" layoutY="42.0" mnemonicParsing="false" onAction="#print" prefHeight="43.0" prefWidth="166.0" text="Print All Accounts" />
+                                <Button layoutX="367.0" layoutY="42.0" mnemonicParsing="false" onAction="#printWithFeeAndInterest" prefHeight="41.0" prefWidth="166.0" text="Calculate Interest and Fees" />
+                                <Button layoutX="40.0" layoutY="140.0" mnemonicParsing="false" onAction="#printByAccountType" prefHeight="44.0" prefWidth="166.0" text="Print All Accounts by Types" />
+                                <Button layoutX="367.0" layoutY="140.0" mnemonicParsing="false" onAction="#updateBalance" prefHeight="43.0" prefWidth="166.0" text="Apply Interests and Fees" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -241,6 +173,6 @@
         </TabPane>
     </top>
     <bottom>
-        <TextArea fx:id="output" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+        <TextArea fx:id="output" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
     </bottom>
 </BorderPane>

@@ -182,7 +182,7 @@ public class AccountDatabase {
         StringBuilder s = new StringBuilder();
         for(int i = 0; i < numAcct; i++)
         {
-            s.append(accounts[i].toString()).append("\n");
+            s.append(accounts[i]).append("\n");
         }
         return s.toString();
     }
@@ -190,33 +190,35 @@ public class AccountDatabase {
     /**
      * This function prints all the accounts in the database by their account type.
      */
-    public void printByAccountType()
+    public String printByAccountType()
     {
        this.sortByAccountType();
-       this.print();
+       return this.print();
     }
 
     /**
      * This function prints the monthly fees and interests of all account types in the database.
      */
-    public void printFeeAndInterest()
+    public String printFeeAndInterest()
     {
         Account[] accounts = this.accounts;
         DecimalFormat df = new DecimalFormat("$#,##0.00");
+        StringBuilder s = new StringBuilder();
         for(int i = 0; i < numAcct; i++)
         {
-            System.out.println(accounts[i] + "::fee " + df.format(accounts[i].fee()) + "::monthly interest " + df.format(accounts[i].monthlyInterest()));
+            s.append(accounts[i]).append("::fee ").append(df.format(accounts[i].fee())).append("::monthly interest ").append(df.format(accounts[i].monthlyInterest())).append("\n");
         }
+        return s.toString();
     }
 
     /**
      * This function prints all account types in the database with the updated balances after deposits, withdrawals, closures,
      * fee and monthly interest.
      */
-    public void printWithUpdatedBalance()
+    public String printWithUpdatedBalance()
     {
         updateBalance();
-        print();
+        return print();
     }
 
     /**
