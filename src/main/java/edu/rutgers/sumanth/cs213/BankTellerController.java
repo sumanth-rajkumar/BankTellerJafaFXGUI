@@ -1,3 +1,8 @@
+/**
+ * This class is what controls all the actions for each button using the inputs given by the
+ * user in the GUI
+ * @author Sumanth Rajkumar, Shantanu Jain
+ */
 package edu.rutgers.sumanth.cs213;
 
 import javafx.fxml.FXML;
@@ -8,58 +13,49 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
-import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class BankTellerController {
-    public static final String missingOpeningData = "Missing data for opening an account.";
-    public static final String missingClosingData = "Missing data for closing an account.";
+
     public AccountDatabase accountDatabase = new AccountDatabase();
-
     @FXML
-    private ToggleGroup oc_accountType;
-
-    @FXML
-    private ToggleGroup dw_accountType;
-
+    private ToggleGroup oc_accountType, dw_accountType;
     @FXML
     private TextArea output;
-
     @FXML
-    private RadioButton camden;
-    
+    private RadioButton camden, nB, newark;
     @FXML
     private TextField deposit, oc_firstName, oc_lastName;
-
     @FXML
     private TextField amount, dw_firstName, dw_lastName;
-
     @FXML
     private DatePicker oc_dob, dw_dob;
-
-    @FXML
-    private RadioButton nB;
-
-    @FXML
-    private RadioButton newark;
-
     @FXML
     private CheckBox loyal;
-
     @FXML
     private RadioButton oc_checking, oc_collegeC, oc_savings, oc_moneyMarket;
     @FXML
     private RadioButton dw_checking, dw_collegeC, dw_savings, dw_moneyMarket;
 
+    /**
+     * This method corresponds to the radio buttons in the open/close tab
+     * of the GUI. Only when selecting the College Checking button, is
+     * the college campus radio buttons are supposed to be available.
+     * Only when selecting the Savings button, is the loyal customer
+     * checkbox supposed to be available.
+     */
     @FXML
-    void selected() {
+    void selected()
+    {
         if(oc_collegeC.isSelected())
         {
             camden.setDisable(false);
             nB.setDisable(false);
             newark.setDisable(false);
         }
-        else {
+        else
+        {
             camden.setDisable(true);
             nB.setDisable(true);
             newark.setDisable(true);
@@ -68,62 +64,101 @@ public class BankTellerController {
     }
 
     /**
-     * This function is a helper that checks if the user enters info only until last name
-     * @param forOpen - a boolean that says if it's the case of opening and account
+     * This method is a helper that checks if the first and last name have any numbers
+     * @param s - String that will be checked to see if there are numbers
+     * @return true if there are numbers, false otherwise
      */
-    private boolean validateFirstLastNames(boolean isOpenClose, boolean forOpen){
+    private boolean checkIfFirstAndLastNameHaveNumbers(String s)
+    {
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(s.charAt(i) >= '0' && s.charAt(i) <= '9')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * This function is a helper that checks if the user's entered first and last name
+     * are valid
+     * @param forOpen - a boolean that is true if it's the case of opening an account
+     */
+    private boolean validateFirstLastNames(boolean isOpenClose, boolean forOpen)
+    {
 
         TextField firstName = isOpenClose ? oc_firstName : dw_firstName;
         TextField lastName = isOpenClose ? oc_lastName : dw_lastName;
 
-        if(firstName.getText()==null || firstName.getText().isBlank()){
+        if(firstName.getText() == null || firstName.getText().isBlank())
+        {
             output.setText("First Name cannot be blank!");
             return false;
         }
-        if(lastName.getText()==null || lastName.getText().isBlank()){
+        if(checkIfFirstAndLastNameHaveNumbers(firstName.getText()))
+        {
+            output.setText("First Name cannot have numbers!");
+            return false;
+        }
+        if(lastName.getText() == null || lastName.getText().isBlank())
+        {
             output.setText("Last Name cannot be blank!");
+            return false;
+        }
+        if(checkIfFirstAndLastNameHaveNumbers(lastName.getText()))
+        {
+            output.setText("Last Name cannot have numbers!");
             return false;
         }
         return true;
     }
 
     /**
-     * This function is a helper that checks if the user enters info only until dob
-     * and validates the dob
-     * @param forOpen - a boolean that says if it's the case of opening and account
+     * This function is a helper that checks if the user's entered dob is
+     * in the future or not.
+     * @param forOpen - a boolean that is true if it's the case of opening an account
      */
-    private Date validateAndParseDOB(boolean isOpenClose, boolean forOpen){
+    private Date validateAndParseDOB(boolean isOpenClose, boolean forOpen)
+    {
 
-        DatePicker dob = isOpenClose?oc_dob:dw_dob;
+        DatePicker dob = isOpenClose ? oc_dob : dw_dob;
+        try
+        {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-        try {
-            LocalDate ldate = dob.getValue();
-            Date dOb = new Date(ldate.getYear(), ldate.getMonth().getValue(), ldate.getDayOfMonth());
+            Date dOb = new Date(formatter.format(dob.getValue()));
             if(dOb.isInTheFuture())
             {
-                output.setText("Date of birth invalid.");
+                output.setText("Date of birth invalid, it's a future date.");
                 return null;
             }
             return dOb;
         }
-        catch(Exception e){
-            output.setText("Date of birth invalid.");
+        catch(Exception e)
+        {
+            output.setText("Date of birth can't be blank.");
             return null;
         }
     }
 
     /**
-     * This function is a helper that populates the account object with given profile info
-     * @param forOpen - a boolean that says if it's the case of opening and account
+     * This function is a helper that populates the account object with the entered profile info in the GUI
+     * @param forOpen - a boolean that is true if it's the case of opening an account
+     * @param isOpenClose - a boolean that is true for the case of opening or closing an account
      * @param account - account being populated
      */
     private boolean populateHolder(boolean isOpenClose, boolean forOpen, Account account)
     {
-        if(!validateFirstLastNames(isOpenClose,forOpen)) {
+        if(!validateFirstLastNames(isOpenClose, forOpen)) {
             return false;
         }
 
-        Date dob = validateAndParseDOB(isOpenClose,forOpen);
+        Date dob = validateAndParseDOB(isOpenClose, forOpen);
         if(dob==null){
             return false;
         }
@@ -133,24 +168,31 @@ public class BankTellerController {
 
     /**
      * This function is a helper that populates the account object with
-     * given profile info and initial deposit info
+     * the entered profile info and initial deposit info from the GUI
      * @param account - account being populated.
+     * @param isOpenClose - a boolean that is true for the case of opening or closing an account
+     * @param errorMessage - String that represents the error message to give at a certain exception
      */
     private boolean populateHolderAndBalance(boolean isOpenClose, Account account, String errorMessage)
     {
-        if(!populateHolder(isOpenClose,true, account)){
+        if(!populateHolder(isOpenClose,true, account))
+        {
             return false;
         }
 
         double balance;
         TextField amt = isOpenClose ? deposit : amount;
-        try {
+        try
+        {
             balance = Double.parseDouble(amt.getText());
-        }catch (Exception e){
-            output.setText("Not a valid amount.");
+        }
+        catch (Exception e)
+        {
+            output.setText("Amount can't be blank or invalid.");
             return false;
         }
-        if(balance <= 0d){
+        if(balance <= 0d)
+        {
             output.setText(errorMessage);
             return false;
         }
@@ -159,27 +201,37 @@ public class BankTellerController {
     }
 
     /**
-     * This function is a helper that checks if account exists or closed
-     * before opening an account.
-     * @param newAccount - account being deposited to.
+     * This function is a helper that checks if account exists or closed before opening an account.
+     * @param newAccount - account being opened.
      */
-    private void checkExistingAndOpenAccount(Account newAccount){
-        if(!populateHolderAndBalance(true,newAccount,"Initial deposit cannot be 0 or negative.")){
+    private void checkExistingAndOpenAccount(Account newAccount)
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        if(!populateHolderAndBalance(true, newAccount,"Initial deposit cannot be 0 or negative."))
+        {
             return;
         }
 
         Account existing = accountDatabase.getAccountIfExists(newAccount);
-        if(existing!=null) {
-            if(!existing.isClosed() || !existing.getType().equals(newAccount.getType())){
-                output.setText(oc_firstName.getText() + " " + oc_lastName.getText() + " " + oc_dob.getValue() + " " + " same account(type) is in the database.");
-            }else{
+        if(existing!=null)
+        {
+            if(!existing.isClosed() || !existing.getType().equals(newAccount.getType()))
+            {
+                output.setText(oc_firstName.getText() + " " + oc_lastName.getText() + " " + formatter.format(oc_dob.getValue()) + " " + " same account(type) is in the database.");
+            }
+            else
+            {
                 accountDatabase.reOpen(newAccount);
                 output.setText("Account reopened.");
             }
-        }else {
-            if(newAccount instanceof  MoneyMarket){
+        }
+        else
+        {
+            if(newAccount instanceof  MoneyMarket)
+            {
                 MoneyMarket moneyMarket = (MoneyMarket) newAccount;
-                if(!moneyMarket.hasMinimumInitialDeposit()){
+                if(!moneyMarket.hasMinimumInitialDeposit())
+                {
                     output.setText("Minimum of $" + MoneyMarket.ExpectedBalance + " to open a MoneyMarket account.");
                     return;
                 }
@@ -190,17 +242,22 @@ public class BankTellerController {
         }
     }
 
+    /**
+     * This method corresponds to the open button in the GUI. Opens an account when
+     * button is clicked depending on the user's entered input.
+     */
     @FXML
-    void open() {
+    void open()
+    {
         RadioButton selectedRadioButton = (RadioButton) oc_accountType.getSelectedToggle();
-        switch (selectedRadioButton.getId()) {
+        switch (selectedRadioButton.getId())
+        {
             case "C" -> caseCheckingForOpen();
             case "CC" -> caseCollegeCheckingForOpen();
             case "S" -> caseSavingsForOpen();
             case "MM" -> caseMoneyMarketForOpen();
             default -> output.setText("Invalid Account Type");
-
-         }
+        }
     }
 
     /**
@@ -211,17 +268,19 @@ public class BankTellerController {
         Checking checking = new Checking();
         checkExistingAndOpenAccount(checking);
     }
+
     /**
      * This function is used to open a College Checking account.
      */
     private void caseCollegeCheckingForOpen()
     {
 
-        if(!newark.isSelected() && !nB.isSelected() && !camden.isSelected()){
+        if(!newark.isSelected() && !nB.isSelected() && !camden.isSelected())
+        {
             output.setText("Choose a college campus");
         }
-        else {
-
+        else
+        {
             CollegeChecking collegeChecking = new CollegeChecking();
             checkExistingAndOpenAccount(collegeChecking);
         }
@@ -238,6 +297,7 @@ public class BankTellerController {
         savings.setLoyalty(loyalty);
         checkExistingAndOpenAccount(savings);
     }
+
     /**
      * This function is used to open a Money Market account.
      */
@@ -249,13 +309,15 @@ public class BankTellerController {
     }
 
     /**
-     * This function is used to close an account.
+     * This function corresponds to the close button in the GUI. Closes an account when
+     * button is clicked depending on the user's entered input.
      */
     @FXML
     void close()
     {
         RadioButton selectedRadioButton = (RadioButton) oc_accountType.getSelectedToggle();
-        switch (selectedRadioButton.getId()) {
+        switch (selectedRadioButton.getId())
+        {
             case "C" -> caseCheckingForClose();
             case "CC" -> caseCollegeCheckingForClose();
             case "S" -> caseSavingsForClose();
@@ -266,24 +328,33 @@ public class BankTellerController {
     }
 
     /**
-     * This function is a helper that checks if account exists or closed
+     * This function is a helper that checks if account exists or already closed
      * before closing an account.
-     * @param account - account being deposited to.
+     * @param account - account being closed
      */
-    private void closeExistingAccount(Account account){
-        if(!populateHolder(true,false, account)){
+    private void closeExistingAccount(Account account)
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        if(!populateHolder(true,false, account))
+        {
             return;
         }
         Account existing = accountDatabase.getAccountIfExists(account);
-        if(existing!=null) {
-            if(!existing.isClosed()){
+        if(existing!=null)
+        {
+            if(!existing.isClosed())
+            {
                 accountDatabase.close(existing);
                 output.setText("Account closed.");
-            }else{
+            }
+            else
+            {
                 output.setText("Account is closed already.");
             }
-        }else{
-            output.setText(oc_firstName.getText() + " " + oc_lastName.getText() + " " + oc_dob.getValue() + " " + account.getShortType() + " is not in the database.");
+        }
+        else
+        {
+            output.setText(oc_firstName.getText() + " " + oc_lastName.getText() + " " + formatter.format(oc_dob.getValue()) + " " + account.getShortType() + " is not in the database.");
         }
 
     }
@@ -330,13 +401,15 @@ public class BankTellerController {
     }
 
     /**
-     * This function is used to deposit to an account.
+     * This function corresponds to the deposit button in the GUI. Deposits to an account when
+     * button is clicked depending on the user's entered input.
      */
     @FXML
     void deposit()
     {
         RadioButton selectedRadioButton = (RadioButton) dw_accountType.getSelectedToggle();
-        switch (selectedRadioButton.getId()) {
+        switch (selectedRadioButton.getId())
+        {
             case "C" -> caseCheckingForDeposit();
             case "CC" -> caseCollegeCheckingForDeposit();
             case "S" -> caseSavingsForDeposit();
@@ -346,24 +419,32 @@ public class BankTellerController {
     }
 
     /**
-     * This function is a helper that checks if account exists or closed
-     * before depositing an amount to an account.
+     * This function is a helper that checks if account exists or closed before depositing an amount to an account.
      * @param account - account being deposited to.
      */
-    private void depositToAccount(Account account){
-        if(!populateHolderAndBalance(false,account,"Deposit - amount cannot be 0 or negative.")){
+    private void depositToAccount(Account account)
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        if(!populateHolderAndBalance(false, account,"Deposit - amount cannot be 0 or negative."))
+        {
             return;
         }
         Account existing = accountDatabase.getAccountIfExists(account);
-        if(existing!=null && existing.getType().equals(account.getType())) {
-            if(!existing.isClosed()){
+        if(existing!=null && existing.getType().equals(account.getType()))
+        {
+            if(!existing.isClosed())
+            {
                 accountDatabase.deposit(account);
                 output.setText("Deposit - balance updated.");
-            }else{
+            }
+            else
+            {
                 output.setText("Account is closed already.");
             }
-        }else{
-            output.setText(dw_firstName.getText() + " " + dw_lastName.getText() + " " + dw_dob.getValue() + " " + account.getShortType() + " is not in the database.");
+        }
+        else
+        {
+            output.setText(dw_firstName.getText() + " " + dw_lastName.getText() + " " + formatter.format(dw_dob.getValue()) + " " + account.getShortType() + " is not in the database.");
         }
 
     }
@@ -406,13 +487,15 @@ public class BankTellerController {
     }
 
     /**
-     * This function is used to withdraw an amount from an account.
+     * This function corresponds to the withdraw button in the GUI. Withdraws from an account when
+     * button is clicked depending on the user's entered input.
      */
     @FXML
     void withdraw()
     {
         RadioButton selectedRadioButton = (RadioButton) dw_accountType.getSelectedToggle();
-        switch (selectedRadioButton.getId()) {
+        switch (selectedRadioButton.getId())
+        {
             case "C" -> caseCheckingForWithdraw();
             case "CC" -> caseCollegeCheckingForWithdraw();
             case "S" -> caseSavingsForWithdraw();
@@ -424,25 +507,37 @@ public class BankTellerController {
     /**
      * This function is a helper that checks if account exists or closed and if
      * the amount being withdrawn is sufficient before withdrawing an amount from an account.
-     * @param account - account being deposited to.
+     * @param account - account being withdrawn.
      */
-    private void withDrawFromAccount(Account account){
-        if(!populateHolderAndBalance(false, account, "Withdraw - amount cannot be 0 or negative.")){
+    private void withDrawFromAccount(Account account)
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        if(!populateHolderAndBalance(false, account, "Withdraw - amount cannot be 0 or negative."))
+        {
             return;
         }
         Account existing = accountDatabase.getAccountIfExists(account);
-        if(existing!=null && existing.getType().equals(account.getType())) {
-            if(!existing.isClosed()){
-                if(accountDatabase.withdraw(account)) {
+        if(existing!=null && existing.getType().equals(account.getType()))
+        {
+            if(!existing.isClosed())
+            {
+                if(accountDatabase.withdraw(account))
+                {
                     output.setText("Withdraw - balance updated.");
-                }else{
+                }
+                else
+                {
                     output.setText("Withdraw - insufficient fund.");
                 }
-            }else{
+            }
+            else
+            {
                 output.setText("Account is closed already.");
             }
-        }else{
-            output.setText(dw_firstName.getText() + " " + dw_lastName.getText() + " " + dw_dob.getValue() + " " + account.getShortType() + " is not in the database.");
+        }
+        else
+        {
+            output.setText(dw_firstName.getText() + " " + dw_lastName.getText() + " " + formatter.format(dw_dob.getValue()) + " " + account.getShortType() + " is not in the database.");
         }
 
     }
@@ -485,16 +580,15 @@ public class BankTellerController {
     }
 
     /**
-     * This function is used to print all accounts
+     * This function corresponds to the print all accounts button in the GUI. Prints all the accounts in
+     * the database in the order they were added in when button is clicked.
      */
     @FXML
     void print()
     {
         if(accountDatabase.getNumAcct() > 0)
         {
-
             output.setText(accountDatabase.print());
-
         }
         else
         {
@@ -503,7 +597,8 @@ public class BankTellerController {
     }
 
     /**
-     * This function is used to print all accounts by order account type.
+     * This function corresponds to the print all accounts by types button in the GUI. Prints all the accounts in
+     * the database by their account type alphabetically when button is clicked.
      */
     @FXML
     void printByAccountType()
@@ -519,7 +614,8 @@ public class BankTellerController {
     }
 
     /**
-     * This function is used to print all accounts with calculated fees and interests.
+     * This function corresponds to the calculate interest and fees button in the GUI. Prints all the accounts in
+     * the database with the calculated fees and interest rate when button is clicked.
      */
     @FXML
     void printWithFeeAndInterest()
@@ -535,7 +631,9 @@ public class BankTellerController {
     }
 
     /**
-     * This function is used to update the balances of all accounts and print them.
+     * This function corresponds to the apply interests and fees button in the GUI. Prints all the accounts in
+     * the database with the updated balance from the calculated fees, interest rate, deposits, withdrawals, and closures
+     * when button is clicked.
      */
     @FXML
     void updateBalance()

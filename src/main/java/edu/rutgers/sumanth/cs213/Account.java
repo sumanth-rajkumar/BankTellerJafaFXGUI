@@ -1,9 +1,11 @@
-package edu.rutgers.sumanth.cs213; /**
+ /*
  * Account Class is an abstract class that defines the common data and operations for all account
  * type; each account has a profile that uniquely identifies the account holder. This is the superclass
- * of all account types, and it is an abstract class with 3 methods.
+ * of all account types, and it is an abstract class with 3 abstract methods.
  * @author Sumanth Rajkumar, Shantanu Jain
  */
+
+package edu.rutgers.sumanth.cs213;
 
 import java.text.DecimalFormat;
 
@@ -21,10 +23,11 @@ public abstract class Account
     }
 
     /**
-     * This function sets the passed in account object's balance and sets the boolean closed variable to false.
-     * @param newAccount
+     * This function sets the passed in account object's balance as the new balance and sets the boolean closed variable to false.
+     * @param newAccount - account object
      */
-    public void reOpen(Account newAccount){
+    public void reOpen(Account newAccount)
+    {
         balance = newAccount.getBalance();
         closed = false;
     }
@@ -32,7 +35,8 @@ public abstract class Account
     /**
      * This function sets the balance to 0 and sets the boolean closed variable to true.
      */
-    public void close(){
+    public void close()
+    {
        balance = 0.0;
        closed = true;
     }
@@ -65,8 +69,10 @@ public abstract class Account
     /**
      * This function updates the balance calculated with the fee and monthly interest.
      */
-    public void updateBalanceWithFeeAndMonthlyInterest(){
-        if(!this.closed) {
+    public void updateBalanceWithFeeAndMonthlyInterest()
+    {
+        if(!this.closed)
+        {
             balance = balance - fee() + monthlyInterest();
         }
     }
@@ -136,7 +142,7 @@ public abstract class Account
 
     /**
      * This function returns a monthly interest depending on the type of the account.
-     * @return The monthly interest that a account holder gets on his account.
+     * @return - a double which is the monthly interest that an account holder gets on his account.
      */
     public abstract double monthlyInterest(); //return the monthly interest
 
@@ -148,11 +154,13 @@ public abstract class Account
     public abstract double fee(); //return the monthly fee
 
     /**
+     * This method gives the name of the account type
      * @return a String, which is the name of the account type.
      */
     public abstract String getType();
 
-    /** This method returns a different way of saying the name of an account type.
+    /**
+     * This method returns a different way of saying the name of an account type.
      * @return a String, which is the name of the account type.
      */
     public String getShortType() {

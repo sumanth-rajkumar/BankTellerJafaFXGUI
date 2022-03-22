@@ -1,7 +1,3 @@
-package edu.rutgers.sumanth.cs213;
-
-import java.util.Calendar;
-
 /**
  * A class that stores the date based off an input string and the current date.
  *
@@ -9,6 +5,12 @@ import java.util.Calendar;
  * the day within the respective instance variables.
  * @author Sumanth Rajkumar, Shantanu Jain
  */
+
+package edu.rutgers.sumanth.cs213;
+
+import java.util.Calendar;
+
+
 
 public class Date implements Comparable<Date> {
     private int year;
@@ -30,24 +32,29 @@ public class Date implements Comparable<Date> {
      *
      * @param date - a string in the form mm/dd/yyyy
      */
-    public Date(String date) {
+    public Date(String date)
+    {
         String[] s = date.split("/");
         int y = Integer.parseInt(s[2]);
         int m = Integer.parseInt(s[0]);
         int d = Integer.parseInt(s[1]);
-        this.year=y;
-        this.month=m;
-        this.day=d;
+        this.year = y;
+        this.month = m;
+        this.day = d;
     }
 
-
-    public Date(int y, int m, int d) {
-        this.year=y;
-        this.month=m;
-        this.day=d;
+    /**
+     * Constructor that creates a date given the year, month, and day
+     * @param y - year
+     * @param m - month
+     * @param d - day
+     */
+    public Date(int y, int m, int d)
+    {
+        this.year = y;
+        this.month = m;
+        this.day = d;
     }
-
-
 
 
     /**
@@ -56,7 +63,8 @@ public class Date implements Comparable<Date> {
      * In the event the user doesn't specify a string,
      * this constructor will run
      */
-    public Date() {
+    public Date()
+    {
         Calendar c = Calendar.getInstance();
         int y = c.get(Calendar.YEAR);
         int m = c.get(Calendar.MONTH)+1;
@@ -69,7 +77,6 @@ public class Date implements Comparable<Date> {
     /**
      * Checks if the day is valid based off the given month,
      * taking into account of leap years as well.
-     *
      * @return true if the day is within the range of the given month,
      * false otherwise.
      */
@@ -108,6 +115,10 @@ public class Date implements Comparable<Date> {
         }
     }
 
+    /**
+     * Checks if the date is in the past
+     * @return true if the date is in the past, false otherwise.
+     */
     public boolean isInThePast()
     {
         Date todayDate = new Date();
@@ -115,6 +126,10 @@ public class Date implements Comparable<Date> {
         return this.compareTo(todayDate) < 0;
     }
 
+    /**
+     * Checks if the date is in the future
+     * @return true if the date is in the future, false otherwise.
+     */
     public boolean isInTheFuture()
     {
         Date todayDate = new Date();
@@ -124,7 +139,6 @@ public class Date implements Comparable<Date> {
 
     /**
      * Checks whether the date's year is a leap year
-     *
      * @return true if the date is in a leap year, false otherwise
      */
     private boolean isLeapYear()
@@ -145,7 +159,6 @@ public class Date implements Comparable<Date> {
 
     /**
      * Returns a string of the date in the format mm/dd/yyyy
-     *
      * @return String representing the date object
      */
     public String toString()
@@ -156,7 +169,7 @@ public class Date implements Comparable<Date> {
     /**
      * Takes in a date object and compares to see if one date is higher, lesser,
      * or equal to each other
-     *
+     * @param date - object that is being compared with
      * @return int representing each case of comparison (0 - equal, 1 - greater, -1 - lesser)
      */
     @Override

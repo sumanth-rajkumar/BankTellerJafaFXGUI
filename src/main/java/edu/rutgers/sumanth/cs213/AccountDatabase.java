@@ -27,7 +27,7 @@ public class AccountDatabase {
     }
 
     /**
-     * @return number of accounts that AccountDatabase object is currently holding.
+     * @return - int which is the number of accounts that Accounts array is currently holding.
      */
     public int getNumAcct()
     {
@@ -36,8 +36,8 @@ public class AccountDatabase {
 
     /**
      * This function finds whether the passed in account object exists in the AccountDatabase object or not.
-     * @param account
-     * @return index at which the passed in account is found, otherwise returns NOT_FOUND.
+     * @param account - the account object that needs to be found
+     * @return - int which is the index at which the passed in account is found, otherwise returns NOT_FOUND.
      */
     private int find(Account account)
     {
@@ -53,11 +53,12 @@ public class AccountDatabase {
     }
 
     /**
-     * This function finds whether the passed in account object exists in the AccountDatabase and returns that account.
-     * @param account
+     * This function finds whether the passed in account object exists in the Account array and returns that account.
+     * @param account - account object that is being checked if it exists
      * @return account if found, null if NOT_FOUND
      */
-    public Account getAccountIfExists(Account account){
+    public Account getAccountIfExists(Account account)
+    {
         int index = find(account);
         if(index == NOT_FOUND){
             return null;
@@ -107,8 +108,10 @@ public class AccountDatabase {
 
     /**
      * This function finds and reopens an account object from the array-based container in AccountDatabase
+     * @param account - account object that needs to be reopened in the array
+     * @return true when the account object is reopened and false when it's not found
      */
-     public boolean reOpen(Account account)
+    public boolean reOpen(Account account)
     {
         Account[] accounts = this.accounts;
         int location = this.find(account);
@@ -176,6 +179,7 @@ public class AccountDatabase {
 
     /**
      * This function prints all the accounts in the database.
+     * @return - String representing all the information of each account object in the array line by line
      */
     public String print()
     {
@@ -189,6 +193,8 @@ public class AccountDatabase {
 
     /**
      * This function prints all the accounts in the database by their account type.
+     * @return - String representing all the information of each account object in the array line by line,
+     * but ordered by each account type alphabetically
      */
     public String printByAccountType()
     {
@@ -198,6 +204,7 @@ public class AccountDatabase {
 
     /**
      * This function prints the monthly fees and interests of all account types in the database.
+     * @return - String representing all the information along with the fee and monthly interest of each account object in the array line by line
      */
     public String printFeeAndInterest()
     {
@@ -214,6 +221,8 @@ public class AccountDatabase {
     /**
      * This function prints all account types in the database with the updated balances after deposits, withdrawals, closures,
      * fee and monthly interest.
+     * @return - String representing all the information with the updated balance from after the fee, monthly interest, deposits,
+     * withdrawals, and closures calculations of each account object in the array line by line
      */
     public String printWithUpdatedBalance()
     {

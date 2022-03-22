@@ -89,8 +89,8 @@
                                                 <CheckBox fx:id="loyal" disable="true" mnemonicParsing="false" text="Loyal Customer" GridPane.rowIndex="3" />
                                             </children>
                                         </GridPane>
-                                        <Label prefHeight="17.0" prefWidth="166.0" text="                         Initial Deposit" GridPane.rowIndex="4" />
-                                        <TextField fx:id="deposit" promptText="enter initial deposit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                        <Label prefHeight="17.0" prefWidth="166.0" text="           Initial Deposit Amount" GridPane.rowIndex="4" />
+                                        <TextField fx:id="deposit" promptText="enter initial deposit amount" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     </children>
                                 </GridPane>
                             </children>

@@ -1,10 +1,12 @@
-package edu.rutgers.sumanth.cs213;
-
 /**
  * MoneyMarket class is the extension of Savings class. It contains the data and specific operations
  * needed to handle a Money Market account.
  * @author Sumanth Rajkumar, Shantanu Jain
  */
+
+package edu.rutgers.sumanth.cs213;
+
+
 public class MoneyMarket extends Savings {
 
 
@@ -17,7 +19,8 @@ public class MoneyMarket extends Savings {
     private int withdrawCounter = 0;
 
     /**
-     * Checks if the passed in object is an instance of Money Market or not.
+     * Checks if the passed in object is an instance of Money Market or not,
+     * overrides method in Account class.
      * @param obj - object
      * @return true if profile of passed in object is equal to the profile of this
      * Account otherwise false.
@@ -34,7 +37,9 @@ public class MoneyMarket extends Savings {
     }
 
     /**
-     * This function is used to get the annualInterest rate of a Money Market account.
+     * This function is used to get the annual interest rate without loyalty bonus of a Savings account,
+     * overrides method in Savings class.
+     * @return - double representing the annual interest without loyalty bonus
      */
     @Override
     protected double getBaseAnnualInterestRate(){
@@ -42,36 +47,45 @@ public class MoneyMarket extends Savings {
     }
 
     /**
-     * This function is used to close a Money Market account and reset the withdrawal counter to 0.
+     * This function is used to close a Money Market account and reset the withdrawal counter to 0,
+     * overrides method in Account class.
      */
     @Override
-    public void close(){
+    public void close()
+    {
        super.close();
-       this.withdrawCounter=0;
+       this.withdrawCounter = 0;
     }
 
     /**
      * This function deducts the balance from an account, the amount that should be deducted from the
-     * balance is passed in as a parameter.
+     * balance is passed in as a parameter, overrides the method in Account class.
      * @param amount - The amount that needs to be deducted or withdrawn from an account.
      */
     @Override
-    public void withdraw(double amount) {
+    public void withdraw(double amount)
+    {
         super.withdraw(amount);
-        withdrawCounter+=1;
+        withdrawCounter += 1;
     }
 
     /**
-     * This function returns a monthly fee that an account holder needs to pay on a monthly basis.
-     * @return - a double that has a monthly fee that an account holder needs to pay on a monthly basis
-     * depending on the account type.
+     * This function returns a monthly fee that an account holder needs to pay on a monthly basis,
+     * overrides method in Account class.
+     * @return - a double that represents a monthly fee that an account holder needs to pay on a monthly basis
+     * depending on the balance.
      */
     @Override
     public double fee()
     {
         if(balance >= ExpectedBalance && withdrawCounter <= maximumWithdrawals)
+        {
             return 0;
-        else return monthlyFee;
+        }
+        else
+        {
+            return monthlyFee;
+        }
     }
 
     /**
@@ -84,43 +98,41 @@ public class MoneyMarket extends Savings {
     {
         if(this.isLoyal())
         {
-            return super.toString() + "::withdrawl: " + withdrawCounter;
+            return super.toString() + "::withdrawal: " + withdrawCounter;
         }
         else if(this.isClosed())
         {
-            return super.toString() + "::withdrawl: " + withdrawCounter;
+            return super.toString() + "::withdrawal: " + withdrawCounter;
         }
-        return super.toString() + "::withdrawl: " + withdrawCounter;
+        return super.toString() + "::withdrawal: " + withdrawCounter;
     }
 
     /**
+     * This function gives the name of the account type, overrides method in Account class.
      * @return a String, which is the name of the account type.
      */
     @Override
-    public String getType() {
+    public String getType()
+    {
         return accountType;
     }
 
-    /** This method returns a different way of saying the name of an account type.
+    /**
+     * This method returns a different way of saying the name of an account type,
+     * overrides method in Account class.
      * @return a String, which is the name of the account type.
      */
     @Override
-    public String getShortType() {
+    public String getShortType()
+    {
         return "Money Market";
     }
 
-    /**
-     * This function sets the balance of an account.
-     * @param loyalty - true if loyal, false if not.
-     */
-    @Override
-    public void setLoyalty(boolean loyalty){
-
-    }
 
     /**
      * This method checks whether an account holder is loyal or not and acts as a helper method
-     * to determine if the initial deposit is greater than or equal to 2500.
+     * to determine if the initial deposit is greater than or equal to 2500,
+     * overrides method in Savings class.
      * @return true if the account holder is loyal, false if the account holder is not loyal.
      */
     @Override

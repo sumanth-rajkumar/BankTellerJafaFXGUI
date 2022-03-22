@@ -1,10 +1,12 @@
-package edu.rutgers.sumanth.cs213;
-
 /**
  * College class is an enum class to set the campus. This class is used to handle CollegeChecking
  * accounts.
  * @author Sumanth Rajkumar, Shantanu Jain
  */
+
+package edu.rutgers.sumanth.cs213;
+
+
 public enum College {
     NEW_BRUNSWICK("0"),
     NEWARK("1"),
@@ -21,7 +23,7 @@ public enum College {
     /**
      * Constructor of this class. Takes in String parameter, should be 0 or 1 or 2
      * to define college campus.
-     * @param collegeCode
+     * @param collegeCode which is a String representing the college campus
      */
     College(String collegeCode)
     {
